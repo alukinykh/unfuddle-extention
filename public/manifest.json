@@ -1,0 +1,16 @@
+{
+  "name": "Unfuddle extension",
+  "manifest_version": 2,
+  "version": "1.0",
+  "description": "Unfuddle tasks extension",
+
+  "permissions": [
+    "tabs",
+    "https://unfuddle.com/*"
+  ],
+
+  "browser_action": {
+    "default_title": "Test",
+    "default_popup": "./index.html"
+  }
+}
