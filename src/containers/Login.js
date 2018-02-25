@@ -1,16 +1,35 @@
-import React from 'react'
-import {Field, reduxForm} from 'redux-form'
-import {connect} from 'react-redux'
-import {setAuthConfigAction, removeAuthConfigAction} from '../actions/'
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import {
+  setAuthConfigAction,
+  removeAuthConfigAction,
+  requestProjects
+} from '../actions/';
 
 const AuthForm = props => {
-  const {handleSubmit, pristine, reset, submitting, setAuthConfig, removeAuthConfig, authConfig } = props
+  const {
+    handleSubmit,
+    error,
+    pristine,
+    reset,
+    submitting,
+    setAuthConfig,
+    removeAuthConfig,
+    authConfig,
+    getProjects
+  } = props;
   const handleResetForm = () => {
-    reset()
-    removeAuthConfig()
-  }
+    reset();
+    removeAuthConfig();
+  };
+  const handleLogin = data => {
+    setAuthConfig(data);
+    getProjects();
+  };
   return (
-    <form onSubmit={handleSubmit((data) => setAuthConfig(data))}>
+    <form onSubmit={handleSubmit(handleLogin)}>
+      <span>{error ? error : ''}</span>
       <div>
         <Field
           name="username"
@@ -35,21 +54,28 @@ const AuthForm = props => {
           placeholder="Subdomain"
         />
       </div>
-      <button type="submit" disabled={pristine || submitting}>Apply</button>
-      <button type="button" disabled={submitting} onClick={handleResetForm}>Reset</button>
+      <button type="submit" disabled={pristine || submitting}>
+        Apply
+      </button>
+      <button type="button" disabled={submitting} onClick={handleResetForm}>
+        Reset
+      </button>
     </form>
-  )
-}
+  );
+};
 
 const mapStateToProps = state => ({
   initialValues: state.auth
-})
+});
 
 const mapDispatchToProps = dispatch => ({
-  setAuthConfig: (data) => dispatch(setAuthConfigAction(data)),
-  removeAuthConfig: () => dispatch(removeAuthConfigAction())
-})
+  setAuthConfig: data => dispatch(setAuthConfigAction(data)),
+  removeAuthConfig: () => dispatch(removeAuthConfigAction()),
+  getProjects: () => dispatch(requestProjects())
+});
 
-export const Login = connect(mapStateToProps, mapDispatchToProps)(reduxForm({
-  form: 'authConfig',
-})(AuthForm))
+export const Login = connect(mapStateToProps, mapDispatchToProps)(
+  reduxForm({
+    form: 'authConfig'
+  })(AuthForm)
+);
