@@ -10,7 +10,7 @@ import {
 const AuthForm = props => {
   const {
     handleSubmit,
-    error,
+    projects,
     pristine,
     reset,
     submitting,
@@ -29,7 +29,7 @@ const AuthForm = props => {
   };
   return (
     <form onSubmit={handleSubmit(handleLogin)}>
-      <span>{error ? error : ''}</span>
+      <span>{projects.error ? projects.error : ''}</span>
       <div>
         <Field
           name="username"
@@ -65,7 +65,8 @@ const AuthForm = props => {
 };
 
 const mapStateToProps = state => ({
-  initialValues: state.auth
+  initialValues: state.auth,
+  projects: state.projects
 });
 
 const mapDispatchToProps = dispatch => ({

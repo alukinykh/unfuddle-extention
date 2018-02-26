@@ -22,7 +22,7 @@ export const projects = (state = initialState, action) => {
         error: []
       };
     case INVALIDATE_REQUEST_PROJECTS:
-      return { ...state, error: action.error };
+      return { ...state, isFetching: false, projects: [], error: action.error };
     default:
       return state;
   }

@@ -1,4 +1,5 @@
 import { SubmissionError } from 'redux-form';
+import { push } from 'react-router-redux';
 import { setAuthConfig, removeAuthConfig, getProjects } from '../api';
 
 export const SET_AUTH_CONFIG = 'SET_AUTH_CONFIG';
@@ -21,8 +22,11 @@ export const removeAuthConfigAction = () => dispatch => {
 export const requestProjects = data => dispatch => {
   dispatch({ type: REQUEST_PROJECTS });
   getProjects()
-    .then(resp => dispatch(receiveProjects(resp.data)))
-    .catch(error => console.log(error));
+    .then(resp => {
+      dispatch(receiveProjects(resp.data));
+      dispatch(push('/projects'));
+    })
+    .catch(error => dispatch(invalidateRequestProjects('Invalid credentials')));
 };
 
 export const receiveProjects = projects => ({
