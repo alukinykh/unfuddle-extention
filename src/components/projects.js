@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import { getProjects, getProject, getTickets, report } from '../api/index';
 
@@ -92,4 +93,4 @@ const mapStateToProps = state => ({
   projects: state.projects.projects
 });
 
-export const Projects = connect(mapStateToProps)(_Projects);
+export const Projects = withRouter(connect(mapStateToProps)(_Projects));
