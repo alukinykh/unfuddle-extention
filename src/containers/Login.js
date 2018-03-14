@@ -25,7 +25,7 @@ const AuthForm = props => {
   };
   const handleLogin = data => {
     setAuthConfig(data);
-    getProjects();
+    getProjects()
   };
   return (
     <form onSubmit={handleSubmit(handleLogin)}>

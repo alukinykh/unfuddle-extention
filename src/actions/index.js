@@ -23,8 +23,8 @@ export const requestProjects = data => dispatch => {
   dispatch({ type: REQUEST_PROJECTS });
   getProjects()
     .then(resp => {
-      dispatch(receiveProjects(resp.data));
-      dispatch(push('/projects'));
+      dispatch(receiveProjects(resp.data))
+      dispatch(push('/projects'))
     })
     .catch(error => dispatch(invalidateRequestProjects('Invalid credentials')));
 };

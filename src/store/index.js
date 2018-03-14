@@ -14,25 +14,25 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const history = createHistory();
+export const history = createHistory()
 
-const initialState = {};
-const enhancers = [];
-const middleware = [thunk, routerMiddleware(history)];
+const initialState = {}
+const enhancers = []
+const middleware = [routerMiddleware(history), thunk]
 
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtension = window.devToolsExtension;
 
-  if (typeof devToolsExtension === 'function') {
+  if (typeof devToolsExtension === 'function') {``
     enhancers.push(devToolsExtension());
   }
 }
 
-const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
+const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers)
 
 export const store = createStore(
   persistedReducer,
   initialState,
-  composedEnhancers
+  composedEnhancers,
 );
-export const persistor = persistStore(store);
+export const persistor = persistStore(store)

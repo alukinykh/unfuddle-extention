@@ -2,9 +2,9 @@ import {getAuthConfig} from '../api/index'
 import { SET_AUTH_CONFIG, REMOVE_AUTH_CONFIG } from '../actions'
 
 const emptyAuthConfig = {
-  username: '',
-  password: '',
-  subdomain: ''
+  username: null,
+  password: null,
+  subdomain: null
 }
 
 const userAuthConfig = getAuthConfig()
