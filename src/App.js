@@ -1,52 +1,64 @@
 import React, { Component } from 'react'
-import { Router, Route, NavLink, Redirect } from 'react-router-dom'
-import { PrivateRoute } from './containers/PrivateRoute'
-import { userIsAuthenticated, userIsNotAuthenticated } from "./auth"
-import { getProjects } from './api/index'
+import { Router, Route, NavLink, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Menu } from 'semantic-ui-react'
+import { userIsAuthenticated, userIsNotAuthenticated } from './auth'
 import { Projects } from './components/projects'
 import { Login } from './containers/Login'
-import {history} from "./store/index"
+import { history } from './store/index'
+import { removeAuthConfigAction } from './actions/index'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      title: ''
-    };
-  }
+  state = { activeItem: 'projects' }
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-  handleClick = () => {
-    getProjects().then(data => this.setState({ title: data[0].title }))
+  handleLogout = (e, { name }) => {
+    this.setState({ activeItem: name })
+    this.props.removeAuthConfig()
   }
 
   render() {
+    const { activeItem } = this.state
     return (
       <Router history={history}>
         <div>
-          <ul>
-            <li>
-              <NavLink exact to="/login">Login</NavLink>
-            </li>
-            <li>
-              <NavLink exact to="/projects">Projects</NavLink>
-            </li>
-            <li>
-              <NavLink exact to="/milestones">Milestones</NavLink>
-            </li>
-          </ul>
-          <div>
-            <Redirect from="/" to="/projects" />
-            <Route path="/login" component={Login} />
-            <Route exact path="/projects" component={userIsAuthenticated(Projects)} />
+          <Menu secondary>
+            <Menu.Item
+              as={NavLink}
+              exact
+              to="/projects"
+              name="projects"
+              active={activeItem === 'projects'}
+              onClick={this.handleItemClick}
+            />
+            <Menu.Item
+              as={NavLink}
+              exact
+              to="/milestones"
+              name="milestones"
+              active={activeItem === 'milestones'}
+              onClick={this.handleItemClick}
+            />
+            <Menu.Menu position="right">
+              <Menu.Item name="logout" active={activeItem === 'logout'} onClick={this.handleLogout} />
+            </Menu.Menu>
+          </Menu>
+          <Switch>
+            <Route path="/login" component={userIsNotAuthenticated(Login)} />
+            <Route path="/projects" component={userIsAuthenticated(Projects)} />
             <Route
               path="/milestones"
               component={userIsAuthenticated(() => <div>milestones</div>)}
             />
-          </div>
+          </Switch>
         </div>
       </Router>
     )
   }
 }
 
-export default App
+const mapDispatchToProps = dispatch => ({
+  removeAuthConfig: () => dispatch(removeAuthConfigAction())
+})
+
+export default connect(null, mapDispatchToProps)(App)

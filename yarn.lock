@@ -61,6 +61,10 @@ acorn@^5.0.0, acorn@^5.4.0:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.4.1.tgz#fdc58d9d17f4a4e98d102ded826a9b9759125102"
 
+acorn@^5.5.0:
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.5.3.tgz#f473dd47e0277a08e28e9bec5aeeb04751f0b8c9"
+
 address@1.0.3, address@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/address/-/address-1.0.3.tgz#b5f50631f8d6cec8bd20c963963afb55e06cbce9"
@@ -397,7 +401,7 @@ babel-core@6.26.0, babel-core@^6.0.0, babel-core@^6.26.0:
     slash "^1.0.0"
     source-map "^0.5.6"
 
-babel-eslint@7.2.3:
+babel-eslint@7.2.3, babel-eslint@^7.2.3:
   version "7.2.3"
   resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-7.2.3.tgz#b2fe2d80126470f5c19442dc757253a897710827"
   dependencies:
@@ -1087,7 +1091,7 @@ babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@6.26.0, babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
+babel-runtime@6.26.0, babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.25.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
@@ -2443,7 +2447,13 @@ eslint-plugin-flowtype@2.39.1:
   dependencies:
     lodash "^4.15.0"
 
-eslint-plugin-import@2.8.0, eslint-plugin-import@^2.8.0:
+eslint-plugin-flowtype@^2.34.1:
+  version "2.46.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.46.1.tgz#c4f81d580cd89c82bc3a85a1ccf4ae3a915143a4"
+  dependencies:
+    lodash "^4.15.0"
+
+eslint-plugin-import@2.8.0:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.8.0.tgz#fa1b6ef31fcb3c501c09859c1b86f1fc5b986894"
   dependencies:
@@ -2458,7 +2468,26 @@ eslint-plugin-import@2.8.0, eslint-plugin-import@^2.8.0:
     minimatch "^3.0.3"
     read-pkg-up "^2.0.0"
 
-eslint-plugin-jsx-a11y@5.1.1:
+eslint-plugin-import@^2.6.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.9.0.tgz#26002efbfca5989b7288ac047508bd24f217b169"
+  dependencies:
+    builtin-modules "^1.1.1"
+    contains-path "^0.1.0"
+    debug "^2.6.8"
+    doctrine "1.5.0"
+    eslint-import-resolver-node "^0.3.1"
+    eslint-module-utils "^2.1.1"
+    has "^1.0.1"
+    lodash "^4.17.4"
+    minimatch "^3.0.3"
+    read-pkg-up "^2.0.0"
+
+eslint-plugin-jest@^21.15.0:
+  version "21.15.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.15.0.tgz#645a3f560d3e61d99611b215adc80b4f31e6d896"
+
+eslint-plugin-jsx-a11y@5.1.1, eslint-plugin-jsx-a11y@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jsx-a11y/-/eslint-plugin-jsx-a11y-5.1.1.tgz#5c96bb5186ca14e94db1095ff59b3e2bd94069b1"
   dependencies:
@@ -2470,18 +2499,6 @@ eslint-plugin-jsx-a11y@5.1.1:
     emoji-regex "^6.1.0"
     jsx-ast-utils "^1.4.0"
 
-eslint-plugin-jsx-a11y@^6.0.3:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsx-a11y/-/eslint-plugin-jsx-a11y-6.0.3.tgz#54583d1ae442483162e040e13cc31865465100e5"
-  dependencies:
-    aria-query "^0.7.0"
-    array-includes "^3.0.3"
-    ast-types-flow "0.0.7"
-    axobject-query "^0.1.0"
-    damerau-levenshtein "^1.0.0"
-    emoji-regex "^6.1.0"
-    jsx-ast-utils "^2.0.0"
-
 eslint-plugin-react@7.4.0:
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.4.0.tgz#300a95861b9729c087d362dd64abcc351a74364a"
@@ -2491,9 +2508,9 @@ eslint-plugin-react@7.4.0:
     jsx-ast-utils "^2.0.0"
     prop-types "^15.5.10"
 
-eslint-plugin-react@^7.6.1:
-  version "7.6.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.6.1.tgz#5d0e908be599f0c02fbf4eef0c7ed6f29dff7633"
+eslint-plugin-react@^7.1.0:
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.7.0.tgz#f606c719dbd8a1a2b3d25c16299813878cca0160"
   dependencies:
     doctrine "^2.0.2"
     has "^1.0.1"
@@ -2557,9 +2574,9 @@ eslint@4.10.0:
     table "^4.0.1"
     text-table "~0.2.0"
 
-eslint@^4.18.0:
-  version "4.18.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.18.0.tgz#ebd0ba795af6dc59aa5cee17938160af5950e051"
+eslint@^4.1.1:
+  version "4.19.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.19.0.tgz#9e900efb5506812ac374557034ef6f5c3642fc4c"
   dependencies:
     ajv "^5.3.0"
     babel-code-frame "^6.22.0"
@@ -2570,7 +2587,7 @@ eslint@^4.18.0:
     doctrine "^2.1.0"
     eslint-scope "^3.7.1"
     eslint-visitor-keys "^1.0.0"
-    espree "^3.5.2"
+    espree "^3.5.4"
     esquery "^1.0.0"
     esutils "^2.0.2"
     file-entry-cache "^2.0.0"
@@ -2592,18 +2609,26 @@ eslint@^4.18.0:
     path-is-inside "^1.0.2"
     pluralize "^7.0.0"
     progress "^2.0.0"
+    regexpp "^1.0.1"
     require-uncached "^1.0.3"
     semver "^5.3.0"
     strip-ansi "^4.0.0"
     strip-json-comments "~2.0.1"
-    table "^4.0.1"
+    table "4.0.2"
     text-table "~0.2.0"
 
-espree@^3.5.1, espree@^3.5.2:
+espree@^3.5.1:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/espree/-/espree-3.5.3.tgz#931e0af64e7fbbed26b050a29daad1fc64799fa6"
   dependencies:
     acorn "^5.4.0"
+    acorn-jsx "^3.0.0"
+
+espree@^3.5.4:
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/espree/-/espree-3.5.4.tgz#b0f447187c8a8bed944b815a660bddf5deb5d1a7"
+  dependencies:
+    acorn "^5.5.0"
     acorn-jsx "^3.0.0"
 
 esprima@^2.6.0:
@@ -2955,9 +2980,9 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-flow-bin@^0.66.0:
-  version "0.66.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.66.0.tgz#a96dde7015dc3343fd552a7b4963c02be705ca26"
+flow-bin@^0.68.0:
+  version "0.68.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.68.0.tgz#86c2d14857d306eb2e85e274f2eebf543564f623"
 
 follow-redirects@^1.2.5:
   version "1.4.1"
@@ -4171,6 +4196,10 @@ jest@20.0.4:
   resolved "https://registry.yarnpkg.com/jest/-/jest-20.0.4.tgz#3dd260c2989d6dad678b1e9cc4d91944f6d602ac"
   dependencies:
     jest-cli "^20.0.4"
+
+jquery@x.*:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
 js-base64@^2.1.9:
   version "2.4.3"
@@ -6239,6 +6268,10 @@ regex-cache@^0.4.2:
   dependencies:
     is-equal-shallow "^0.1.3"
 
+regexpp@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/regexpp/-/regexpp-1.0.1.tgz#d857c3a741dce075c2848dcb019a0a975b190d43"
+
 regexpu-core@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/regexpu-core/-/regexpu-core-1.0.0.tgz#86a763f58ee4d7c2f6b102e4764050de7ed90c6b"
@@ -6522,6 +6555,22 @@ selfsigned@^1.9.1:
   resolved "https://registry.yarnpkg.com/selfsigned/-/selfsigned-1.10.2.tgz#b4449580d99929b65b10a48389301a6592088758"
   dependencies:
     node-forge "0.7.1"
+
+semantic-ui-css@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/semantic-ui-css/-/semantic-ui-css-2.3.0.tgz#e96d0d4069499eafff9ba0c84274bc23d2b084e7"
+  dependencies:
+    jquery x.*
+
+semantic-ui-react@^0.78.3:
+  version "0.78.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-react/-/semantic-ui-react-0.78.3.tgz#c45ca374c8f1b61bc4fbe29e564a5fe6af5403f8"
+  dependencies:
+    babel-runtime "^6.25.0"
+    classnames "^2.2.5"
+    fbjs "^0.8.16"
+    lodash "^4.17.4"
+    prop-types "^15.5.10"
 
 semver-diff@^2.0.0:
   version "2.1.0"
@@ -6976,7 +7025,7 @@ symbol-tree@^3.2.1:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
 
-table@^4.0.1:
+table@4.0.2, table@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/table/-/table-4.0.2.tgz#a33447375391e766ad34d3486e6e2aedc84d2e36"
   dependencies:

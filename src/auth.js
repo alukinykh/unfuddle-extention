@@ -12,7 +12,8 @@ export const userIsNotAuthenticated = connectedRouterRedirect({
   allowRedirectBack: false,
   // If selector is true, wrapper will not redirect
   // So if there is no user data, then we show the page
-  authenticatedSelector: state => state.auth.username === null && state.auth.password === null && state.auth.subdomain === null,
+  authenticatedSelector:
+      state => state.auth.username === null && state.auth.password === null && state.auth.subdomain === null,
   // A nice display name for this check
   wrapperDisplayName: 'UserIsNotAuthenticated'
 })

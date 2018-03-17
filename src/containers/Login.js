@@ -1,11 +1,12 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
+import { Form, Input, Button } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 import {
   setAuthConfigAction,
   removeAuthConfigAction,
   requestProjects
-} from '../actions/';
+} from '../actions/'
 
 const AuthForm = props => {
   const {
@@ -18,65 +19,95 @@ const AuthForm = props => {
     removeAuthConfig,
     authConfig,
     getProjects
-  } = props;
+  } = props
   const handleResetForm = () => {
-    reset();
-    removeAuthConfig();
-  };
+    reset()
+    removeAuthConfig()
+  }
   const handleLogin = data => {
-    setAuthConfig(data);
+    setAuthConfig(data)
     getProjects()
-  };
+  }
   return (
-    <form onSubmit={handleSubmit(handleLogin)}>
+    <Form as="form" onSubmit={handleSubmit(handleLogin)}>
       <span>{projects.error ? projects.error : ''}</span>
-      <div>
-        <Field
-          name="username"
-          type="text"
-          component="input"
-          placeholder="Username"
-        />
-      </div>
-      <div>
-        <Field
-          name="password"
-          type="password"
-          component="input"
-          placeholder="Password"
-        />
-      </div>
-      <div>
-        <Field
-          name="subdomain"
-          type="text"
-          component="input"
-          placeholder="Subdomain"
-        />
-      </div>
-      <button type="submit" disabled={pristine || submitting}>
-        Apply
-      </button>
-      <button type="button" disabled={submitting} onClick={handleResetForm}>
-        Reset
-      </button>
-    </form>
-  );
-};
+      <Form.Field
+        as="FormField"
+        control={Field}
+        name="username"
+        type="text"
+        component="input"
+        placeholder="Username"
+        label="Username"
+      />
+      <Form.Field
+        as="FormField"
+        control={Field}
+        name="password"
+        type="password"
+        component="input"
+        placeholder="Password"
+        label="Password"
+      />
+      <Form.Field
+        as="FormField"
+        control={Field}
+        name="subdomain"
+        type="text"
+        component="input"
+        placeholder="Subdomain"
+        label="Subdomain"
+      />
+      <Button type="submit" disabled={pristine || submitting}>Login</Button>
+    </Form>
+
+    // <form >
+    //   <span>{projects.error ? projects.error : ''}</span>
+    //   <div>
+    //     <Field
+    //       name="username"
+    //       type="text"
+    //       component={Input}
+    //       placeholder="Username"
+    //     />
+    //   </div>
+    //   <div>
+    //     <Field
+    //       name="password"
+    //       type="password"
+    //       component={Input}
+    //       placeholder="Password"
+    //     />
+    //   </div>
+    //   <div>
+    //     <Field
+    //       name="subdomain"
+    //       type="text"
+    //       component={Input}
+    //       placeholder="Subdomain"
+    //     />
+    //   </div>
+    //   <button type="submit" disabled={pristine || submitting}>
+    //     Apply
+    //   </button>
+    //   <button type="button" >
+    //     Reset
+    //   </button>
+    // </form>
+  )
+}
 
 const mapStateToProps = state => ({
   initialValues: state.auth,
   projects: state.projects
-});
+})
 
 const mapDispatchToProps = dispatch => ({
   setAuthConfig: data => dispatch(setAuthConfigAction(data)),
   removeAuthConfig: () => dispatch(removeAuthConfigAction()),
   getProjects: () => dispatch(requestProjects())
-});
+})
 
-export const Login = connect(mapStateToProps, mapDispatchToProps)(
-  reduxForm({
-    form: 'authConfig'
-  })(AuthForm)
-);
+export const Login = connect(mapStateToProps, mapDispatchToProps)(reduxForm({
+  form: 'authConfig'
+})(AuthForm))

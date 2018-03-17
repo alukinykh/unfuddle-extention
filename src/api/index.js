@@ -1,16 +1,16 @@
 // @flow
 
-import axios from 'axios';
-import store from 'store';
+import axios from 'axios'
+import store from 'store'
 
-const authConfig = 'authConfig';
+const authConfig = 'authConfig'
 
-export const setAuthConfig = data => store.set(authConfig, data);
-export const getAuthConfig = () => store.get(authConfig);
-export const removeAuthConfig = () => store.remove(authConfig);
+export const setAuthConfig = data => store.set(authConfig, data)
+export const getAuthConfig = () => store.get(authConfig)
+export const removeAuthConfig = () => store.remove(authConfig)
 
 export const prepareRequest = (method, url, data) => {
-  const authConfig = getAuthConfig();
+  const authConfig = getAuthConfig()
   return axios.request({
     url,
     method,
@@ -20,33 +20,31 @@ export const prepareRequest = (method, url, data) => {
       password: authConfig.password
     },
     data
-  });
-};
+  })
+}
 
-export const getProjects = async () => {
-  return await prepareRequest('get', '/projects.json');
-};
+export const getProjects = async () => await prepareRequest('get', '/projects.json')
 
 export const getProject = async id => {
-  const resp = await prepareRequest('get', `/projects/${id}/milestones.json`);
-  console.log(resp.data);
-  return resp.data;
-};
+  const resp = await prepareRequest('get', `/projects/${id}/milestones.json`)
+  console.log(resp.data)
+  return resp.data
+}
 
 export const getTickets = async (project_id, id) => {
   const resp = await prepareRequest(
     'get',
     `/projects/${project_id}/milestones/${id}/active_tickets.json`
-  );
-  console.log(resp.data);
-  return resp.data;
-};
+  )
+  console.log(resp.data)
+  return resp.data
+}
 
 export const report = async id => {
   const resp = await prepareRequest(
     'get',
     `projects/${id}/overall_progress.json`
-  );
-  console.log(resp.data);
-  return resp.data;
-};
+  )
+  console.log(resp.data)
+  return resp.data
+}

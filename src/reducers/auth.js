@@ -1,4 +1,4 @@
-import {getAuthConfig} from '../api/index'
+import { getAuthConfig } from '../api/index'
 import { SET_AUTH_CONFIG, REMOVE_AUTH_CONFIG } from '../actions'
 
 const emptyAuthConfig = {
@@ -9,7 +9,7 @@ const emptyAuthConfig = {
 
 const userAuthConfig = getAuthConfig()
 
-const initialState = userAuthConfig ? userAuthConfig : emptyAuthConfig
+const initialState = userAuthConfig || emptyAuthConfig
 
 export const auth = (state = initialState, action) => {
   switch (action.type) {

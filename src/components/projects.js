@@ -7,27 +7,26 @@ import { getProjects, getProject, getTickets, report } from '../api/index'
 
 class _Projects extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       milestones: [],
       tickets: [],
       report: []
-    };
+    }
   }
 
   getOption = id => {
     getProject(id).then(milestones =>
-      this.setState({ milestones: milestones })
-    );
-    report(id).then(data => this.setState({ report: data.milestones }));
+      this.setState({ milestones }))
+    report(id).then(data => this.setState({ report: data.milestones }))
   };
 
   getTickets = (project_id, id) => {
-    getTickets(project_id, id).then(data => this.setState({ tickets: data }));
+    getTickets(project_id, id).then(data => this.setState({ tickets: data }))
   };
 
   render() {
-    console.log(this.props);
+    console.log(this.props)
     return (
       <div>
         <List>
@@ -54,12 +53,10 @@ class _Projects extends React.Component {
                 </div>
                 <div>
                   Finish Date:{' '}
-                  {Math.ceil(
-                    (
+                  {Math.ceil((
                       item.hours_estimate_current_active -
                       item.hours_actual_active
-                    ).toFixed(2) / 8
-                  )}
+                    ).toFixed(2) / 8)}
                 </div>
               </ListItem>
             ))}
@@ -84,13 +81,13 @@ class _Projects extends React.Component {
           </List>
         </div>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => ({
   projects: state.projects.projects
-});
+})
 
 export const Projects = connect(mapStateToProps)(_Projects)
 
