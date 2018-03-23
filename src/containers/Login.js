@@ -3,10 +3,17 @@ import { Field, reduxForm } from 'redux-form'
 import { Form, Input, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import {
-  setAuthConfigAction,
   removeAuthConfigAction,
   requestProjects
 } from '../actions/'
+
+const renderInput = (props) => (
+  <Form.Field
+    as="FormField"
+    control={Input}
+    {...props}
+  />
+)
 
 const AuthForm = props => {
   const {
@@ -15,9 +22,7 @@ const AuthForm = props => {
     pristine,
     reset,
     submitting,
-    setAuthConfig,
     removeAuthConfig,
-    authConfig,
     getProjects
   } = props
   const handleResetForm = () => {
@@ -25,75 +30,36 @@ const AuthForm = props => {
     removeAuthConfig()
   }
   const handleLogin = data => {
-    setAuthConfig(data)
-    getProjects()
+    getProjects(data)
   }
   return (
     <Form as="form" onSubmit={handleSubmit(handleLogin)}>
       <span>{projects.error ? projects.error : ''}</span>
-      <Form.Field
-        as="FormField"
-        control={Field}
+      <Field
         name="username"
         type="text"
-        component="input"
         placeholder="Username"
         label="Username"
+        component={renderInput}
       />
-      <Form.Field
+      <Field
         as="FormField"
-        control={Field}
         name="password"
         type="password"
-        component="input"
         placeholder="Password"
         label="Password"
+        component={renderInput}
       />
-      <Form.Field
+      <Field
         as="FormField"
-        control={Field}
         name="subdomain"
         type="text"
-        component="input"
         placeholder="Subdomain"
         label="Subdomain"
+        component={renderInput}
       />
       <Button type="submit" disabled={pristine || submitting}>Login</Button>
     </Form>
-
-    // <form >
-    //   <span>{projects.error ? projects.error : ''}</span>
-    //   <div>
-    //     <Field
-    //       name="username"
-    //       type="text"
-    //       component={Input}
-    //       placeholder="Username"
-    //     />
-    //   </div>
-    //   <div>
-    //     <Field
-    //       name="password"
-    //       type="password"
-    //       component={Input}
-    //       placeholder="Password"
-    //     />
-    //   </div>
-    //   <div>
-    //     <Field
-    //       name="subdomain"
-    //       type="text"
-    //       component={Input}
-    //       placeholder="Subdomain"
-    //     />
-    //   </div>
-    //   <button type="submit" disabled={pristine || submitting}>
-    //     Apply
-    //   </button>
-    //   <button type="button" >
-    //     Reset
-    //   </button>
-    // </form>
   )
 }
 
@@ -103,9 +69,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setAuthConfig: data => dispatch(setAuthConfigAction(data)),
   removeAuthConfig: () => dispatch(removeAuthConfigAction()),
-  getProjects: () => dispatch(requestProjects())
+  getProjects: (data) => dispatch(requestProjects(data))
 })
 
 export const Login = connect(mapStateToProps, mapDispatchToProps)(reduxForm({

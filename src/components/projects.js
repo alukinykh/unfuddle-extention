@@ -2,6 +2,9 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
+import { Dropdown } from 'semantic-ui-react'
+import { map } from 'ramda'
+
 import List, { ListItem, ListItemText } from 'material-ui/List'
 import { getProjects, getProject, getTickets, report } from '../api/index'
 
@@ -19,27 +22,26 @@ class _Projects extends React.Component {
     getProject(id).then(milestones =>
       this.setState({ milestones }))
     report(id).then(data => this.setState({ report: data.milestones }))
-  };
+  }
 
   getTickets = (project_id, id) => {
     getTickets(project_id, id).then(data => this.setState({ tickets: data }))
-  };
+  }
+
+  handleChange = (e, data) => {
+    this.getOption(data.value)
+  }
 
   render() {
-    console.log(this.props)
     return (
       <div>
-        <List>
-          {this.props.projects.map(project => (
-            <ListItem
-              button
-              key={project.id}
-              onClick={() => this.getOption(project.id)}
-            >
-              <ListItemText primary={project.title} secondary="Jan 9, 2014" />
-            </ListItem>
-          ))}
-        </List>
+        <Dropdown
+          placeholder="Select Project"
+          fluid
+          selection
+          options={this.props.projects}
+          onChange={this.handleChange}
+        />
         <div>
           <List>
             {this.state.report.map(item => (
@@ -86,7 +88,7 @@ class _Projects extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  projects: state.projects.projects
+  projects: map((project) => ({ key: project.id, text: project.title, value: project.id }), state.projects.projects)
 })
 
 export const Projects = connect(mapStateToProps)(_Projects)

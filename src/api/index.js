@@ -9,21 +9,21 @@ export const setAuthConfig = data => store.set(authConfig, data)
 export const getAuthConfig = () => store.get(authConfig)
 export const removeAuthConfig = () => store.remove(authConfig)
 
-export const prepareRequest = (method, url, data) => {
-  const authConfig = getAuthConfig()
-  return axios.request({
-    url,
-    method,
-    baseURL: `https://${authConfig.subdomain}.unfuddle.com/api/v1`,
-    auth: {
-      username: authConfig.username,
-      password: authConfig.password
-    },
-    data
-  })
-}
+export const prepareRequest = (method, url, data, credentials = getAuthConfig()) => axios.request({
+  url,
+  method,
+  baseURL: `https://${credentials.subdomain}.unfuddle.com/api/v1`,
+  auth: {
+    username: credentials.username,
+    password: credentials.password
+  },
+  data
+})
 
-export const getProjects = async () => await prepareRequest('get', '/projects.json')
+export const getProjects = async (data) => {
+  const resp = await prepareRequest('get', '/projects.json', null, data)
+  return resp
+}
 
 export const getProject = async id => {
   const resp = await prepareRequest('get', `/projects/${id}/milestones.json`)
